@@ -7,10 +7,10 @@ import java.awt.Graphics2D;
 
 public class Paddle {
 
-    private final int SPEED = 5;
+    private final int SPEED = 6;
     private final int WIDTH = 15;
     private final int DEFAULT_HEIGHT = 120;
-    private int height = DEFAULT_HEIGHT; // Paddle height shall be decreasing over time.
+    private int height = DEFAULT_HEIGHT;
     private int x;
     private int y;
 
@@ -27,14 +27,32 @@ public class Paddle {
         y = Pong.HEIGHT / 2 - height / 2;
     }
 
+    public int getWidth() {
+        return WIDTH;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
     public void moveUp() {
-        if (!checkTopBorder())
+        if (!checkTopBorder()) {
             y -= SPEED;
+        }
     }
 
     public void moveDown() {
-        if (!checkBottomBorder())
+        if (!checkBottomBorder()) {
             y += SPEED;
+        }
     }
 
     private boolean checkTopBorder() {
@@ -43,6 +61,16 @@ public class Paddle {
 
     private boolean checkBottomBorder() {
         return y >= Pong.HEIGHT - height;
+    }
+
+    public void decreaseHeight() {
+        if (height >= 30) {
+            height -= 2;
+        }
+    }
+
+    public void resetHeight() {
+        height = DEFAULT_HEIGHT;
     }
 
     public void render(Graphics2D g) {

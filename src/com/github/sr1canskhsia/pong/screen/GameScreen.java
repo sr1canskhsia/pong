@@ -23,16 +23,26 @@ public class GameScreen extends Screen {
         g.drawOval(Pong.WIDTH / 2 - 150, Pong.HEIGHT / 2 - 150, 300, 300);
         pong.getPaddle1().render(g);
         pong.getPaddle2().render(g);
+        pong.getBall().render(g);
+        pong.getScoreBoard().render(g);
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
+        super.keyPressed(e);
         switch (e.getKeyCode()) {
             case KeyEvent.VK_W:
             case KeyEvent.VK_S:
             case KeyEvent.VK_UP:
             case KeyEvent.VK_DOWN:
                 pong.getPaddleKeys().pressKey(e);
+                break;
+            case KeyEvent.VK_SPACE:
+                if (pong.getTimer().isRunning()) {
+                    pong.getTimer().stop();
+                } else {
+                    pong.getTimer().start();
+                }
                 break;
         }
     }

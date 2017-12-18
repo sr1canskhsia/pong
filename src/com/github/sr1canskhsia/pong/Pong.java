@@ -16,12 +16,16 @@ public class Pong extends JPanel {
 
     public static final int WIDTH = 700;
     public static final int HEIGHT = 500;
-    private final int TICK = 5;
+    private final int TICK = 10;
 
     private Screen screen;
     private Paddle paddle1;
     private Paddle paddle2;
     private PaddleKeys paddleKeys;
+    private ScoreBoard scoreBoard;
+    private Ball ball;
+    private AI ai;
+    private Timer timer;
     private int gameMode;
 
     public Pong() {
@@ -51,6 +55,18 @@ public class Pong extends JPanel {
         return paddleKeys;
     }
 
+    public ScoreBoard getScoreBoard() {
+        return scoreBoard;
+    }
+
+    public Ball getBall() {
+        return ball;
+    }
+
+    public Timer getTimer() {
+        return timer;
+    }
+
     public void setScreen(Screen screen) {
         this.removeKeyListener(this.screen);
         this.screen = screen;
@@ -63,6 +79,10 @@ public class Pong extends JPanel {
         screen.render((Graphics2D) g);
     }
 
+    public int getGameMode() {
+        return gameMode;
+    }
+
     public void setGameMode(int gameMode) {
         this.gameMode = gameMode;
     }
@@ -71,30 +91,78 @@ public class Pong extends JPanel {
         paddle1 = new Paddle("LEFT");
         paddle2 = new Paddle("RIGHT");
         paddleKeys = new PaddleKeys();
+        scoreBoard = new ScoreBoard();
+        ball = new Ball(scoreBoard);
 
-        Timer t = new Timer(TICK, update);
-        t.start();
+        if (gameMode == 1) {
+            ai = new AI(paddle1, ball);
+        }
+
+        timer = new Timer(TICK, update);
+        timer.start();
     }
 
     private ActionListener update = e -> {
         movePaddle();
+        updateBall();
+        checkScore();
         repaint();
     };
 
     private void movePaddle() {
         if (gameMode == 1) {
-            // AI to be implemented
+            ai.movePaddle();
         } else {
-            if (paddleKeys.pressedW())
+            if (paddleKeys.pressedW()) {
                 paddle1.moveUp();
-            if (paddleKeys.pressedS())
+            }
+            if (paddleKeys.pressedS()) {
                 paddle1.moveDown();
+            }
         }
 
-        if (paddleKeys.pressedUp())
+        if (paddleKeys.pressedUp()) {
             paddle2.moveUp();
-        if (paddleKeys.pressedDown())
+        }
+        if (paddleKeys.pressedDown()) {
             paddle2.moveDown();
+        }
+    }
+
+    private void updateBall() {
+        if (ball.checkBorderCollision()) {
+            ball.bounceBorder();
+        }
+        if (ball.checkPaddleCollision(paddle1)) {
+            ball.bouncePaddle(paddle1);
+            paddle1.decreaseHeight();
+            paddle2.decreaseHeight();
+        }
+        if (ball.checkPaddleCollision(paddle2)) {
+            ball.bouncePaddle(paddle2);
+            paddle1.decreaseHeight();
+            paddle2.decreaseHeight();
+        }
+        ball.move();
+    }
+
+    private void checkScore() {
+        if (ball.checkPaddle1Scored() || ball.checkPaddle2Scored()) {
+            if (ball.checkPaddle1Scored()) {
+                scoreBoard.incrementScore1();
+            } else {
+                scoreBoard.incrementScore2();
+            }
+
+            if (scoreBoard.getScore1() == 10 || scoreBoard.getScore2() == 10) {
+                timer.stop();
+                this.setScreen(new ResultScreen(this));
+            } else {
+                paddle1.resetHeight();
+                paddle2.resetHeight();
+                ball.spawn();
+            }
+        }
     }
 
     public static void main(String[] args) {
