@@ -7,9 +7,9 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
-public class TitleScreen extends Screen {
+public class HelpScreen extends Screen {
 
-    public TitleScreen(Pong pong) {
+    public HelpScreen(Pong pong) {
         super(pong);
     }
 
@@ -21,21 +21,24 @@ public class TitleScreen extends Screen {
         g.drawString("PONG", Pong.WIDTH / 2 - 75, 70);
 
         g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 30));
-        g.drawString("1 - Single Player Mode", 120, 230);
-        g.drawString("2 - Two Player Mode", 120, 280);
-        g.drawString("M - Toggle Background Music", 120, 330); // To do
+        g.drawString("Left Paddle - W & S (2nd Player)", 65, 180);
+        g.drawString("Right Paddle - Up & Down Arrows", 70, 230);
+        g.drawString("Space - Pause Game", 190, 280);
+        g.drawString("ESC - Back To Title", 182, 330);
+
+        g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 45));
+        g.drawString("*PRESS SPACE TO START*", 55, 430);
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
-            case KeyEvent.VK_1:
-                pong.setGameMode(1);
-                pong.setScreen(new HelpScreen(pong));
+            case (KeyEvent.VK_SPACE):
+                pong.setScreen(new GameScreen(pong));
+                pong.init();
                 break;
-            case KeyEvent.VK_2:
-                pong.setGameMode(2);
-                pong.setScreen(new HelpScreen(pong));
+            case (KeyEvent.VK_ESCAPE):
+                pong.setScreen(new TitleScreen(pong));
                 break;
         }
     }

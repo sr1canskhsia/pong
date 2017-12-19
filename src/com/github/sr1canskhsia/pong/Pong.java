@@ -1,6 +1,7 @@
 package com.github.sr1canskhsia.pong;
 
 import com.github.sr1canskhsia.pong.core.*;
+import com.github.sr1canskhsia.pong.music.*;
 import com.github.sr1canskhsia.pong.screen.*;
 
 import javax.swing.JFrame;
@@ -28,7 +29,11 @@ public class Pong extends JPanel {
     private Timer timer;
     private int gameMode;
 
+    private Music music;
+
     public Pong() {
+        music = new Music();
+
         JFrame frame = new JFrame();
         frame.setTitle("Pong");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -65,6 +70,10 @@ public class Pong extends JPanel {
 
     public Timer getTimer() {
         return timer;
+    }
+
+    public Music getMusic() {
+        return music;
     }
 
     public void setScreen(Screen screen) {
