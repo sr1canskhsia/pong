@@ -17,13 +17,13 @@ public class ResultScreen extends Screen {
     public void render(Graphics2D g) {
         super.render(g);
         g.setColor(Color.WHITE);
-        g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 60));
+        g.setFont(new Font("Courier New", Font.BOLD, 60));
         g.drawString("PONG", Pong.WIDTH / 2 - 75, 70);
 
-        g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 50));
+        g.setFont(new Font("Courier New", Font.BOLD, 50));
         g.drawString(getResult(), Pong.WIDTH / 2 - (pong.getGameMode() == 1 ? 174 : 200), 170);
 
-        g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 30));
+        g.setFont(new Font("Courier New", Font.BOLD, 30));
         g.drawString("Space - Play Again", 190, 250);
         g.drawString("ESC - Title Screen", 190, 300);
     }

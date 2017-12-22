@@ -17,16 +17,16 @@ public class HelpScreen extends Screen {
     public void render(Graphics2D g) {
         super.render(g);
         g.setColor(Color.WHITE);
-        g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 60));
+        g.setFont(new Font("Courier New", Font.BOLD, 60));
         g.drawString("PONG", Pong.WIDTH / 2 - 75, 70);
 
-        g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 30));
+        g.setFont(new Font("Courier New", Font.BOLD, 30));
         g.drawString("Left Paddle - W & S (2nd Player)", 65, 180);
         g.drawString("Right Paddle - Up & Down Arrows", 70, 230);
         g.drawString("Space - Pause Game", 190, 280);
         g.drawString("ESC - Back To Title", 182, 330);
 
-        g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 45));
+        g.setFont(new Font("Courier New", Font.BOLD, 45));
         g.drawString("*PRESS SPACE TO START*", 55, 430);
     }
 

@@ -36,7 +36,7 @@ public class ScoreBoard {
 
     public void render(Graphics2D g) {
         g.setColor(Color.WHITE);
-        g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 55));
+        g.setFont(new Font("Courier New", Font.BOLD, 55));
         g.drawString(String.valueOf(score1), Pong.WIDTH / 2 - 100, 50);
         g.drawString(String.valueOf(score2), Pong.WIDTH / 2 + 70, 50);
     }

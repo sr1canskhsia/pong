@@ -29,7 +29,7 @@ public class GameScreen extends Screen {
         pong.getScoreBoard().render(g);
 
         if (!pong.getTimer().isRunning()) {
-            g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 55));
+            g.setFont(new Font("Courier New", Font.BOLD, 55));
             g.drawString("PAUSED", Pong.WIDTH / 2 - 99, Pong.HEIGHT / 2 + 15);
         }
     }

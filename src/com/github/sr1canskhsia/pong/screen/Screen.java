@@ -23,7 +23,7 @@ public abstract class Screen extends KeyAdapter {
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         g.setColor(Color.WHITE);
-        g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 28));
+        g.setFont(new Font("Courier New", Font.BOLD, 28));
         g.drawString("BGM: " + (pong.getMusic().isPlaying() ? "On" : "Off"), 40, 52);
     }
 

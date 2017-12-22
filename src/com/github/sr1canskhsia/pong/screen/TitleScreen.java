@@ -17,10 +17,10 @@ public class TitleScreen extends Screen {
     public void render(Graphics2D g) {
         super.render(g);
         g.setColor(Color.WHITE);
-        g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 60));
+        g.setFont(new Font("Courier New", Font.BOLD, 60));
         g.drawString("PONG", Pong.WIDTH / 2 - 75, 70);
 
-        g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 30));
+        g.setFont(new Font("Courier New", Font.BOLD, 30));
         g.drawString("1 - Single Player Mode", 120, 230);
         g.drawString("2 - Two Player Mode", 120, 280);
         g.drawString("M - Toggle Background Music", 120, 330); // To do
